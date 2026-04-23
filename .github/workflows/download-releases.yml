@@ -25,6 +25,7 @@ jobs:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
           ref: releases
+
       - name: Configure Git
         run: |
           git config --global user.email "parsastdev@duck.com"
