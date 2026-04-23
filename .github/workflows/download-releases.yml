@@ -1,7 +1,18 @@
-name: Download AB Download Manager
+name: Download Releases
 
 on:
   workflow_dispatch:
+    inputs:
+      GITHUB_REPO:
+        description: 'GITHUB_REPO'
+        required: true
+        default: 'amir1376/ab-download-manager'
+      VERSION:
+        description: 'VERSION'
+        required: true
+      FILE_NAME:
+        description: 'FILE_NAME'
+        required: true
 
 jobs:
   push:
@@ -21,7 +32,7 @@ jobs:
 
       - name: Push Release to Repo
         run: |
-          aria2c https://github.com/amir1376/ab-download-manager/releases/download/v1.8.8/ABDownloadManager_1.8.8_android_universal.apk && aria2c https://github.com/amir1376/ab-download-manager/releases/download/v1.8.8/ABDownloadManager_1.8.8_linux_x64.tar.gz
+          aria2c https://github.com/${{ github.event.inputs.GITHUB_REPO }}/releases/download/${{ github.event.inputs.VERSION }}/${{ github.event.inputs.FILE_NAME }}
           git add -A
           git commit -m "push release to repo"
           git push -u origin main
