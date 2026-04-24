@@ -1,4 +1,4 @@
-name: Download Releases
+name: Download Release
 
 on:
   workflow_dispatch:
@@ -31,9 +31,12 @@ jobs:
           git config --global user.email "parsastdev@duck.com"
           git config --global user.name "Parsast"
 
-      - name: Push Release to Repo
+      - name: Download Release
         run: |
           aria2c https://github.com/${{ github.event.inputs.GITHUB_REPO }}/releases/download/${{ github.event.inputs.VERSION }}/${{ github.event.inputs.FILE_NAME }}
+
+      - name: Push Release to Repo
+        run: |
           git add -A
           git commit -m "push release to repo"
           git push -u origin releases
