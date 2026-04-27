@@ -32,8 +32,7 @@ jobs:
           git config --global user.name "Parsast"
 
       - name: Download Release
-        run: |
-          aria2c https://github.com/${{ github.event.inputs.GITHUB_REPO }}/releases/download/${{ github.event.inputs.VERSION }}/${{ github.event.inputs.FILE_NAME }}
+        run: aria2c https://github.com/${{ github.event.inputs.GITHUB_REPO }}/releases/download/${{ github.event.inputs.VERSION }}/${{ github.event.inputs.FILE_NAME }}
 
       - name: Push Release to Repo
         run: |
