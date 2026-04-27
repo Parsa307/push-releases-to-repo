@@ -27,7 +27,7 @@ jobs:
           git config --global user.name "Parsast"
 
       - name: Download from Booru
-        run: curl -s https://yande.re/post.json?limit=${{ github.event.inputs.LIMIT }}&tags=${{ github.event.inputs.TAG }} | jq -r '.[].jpeg_url' | aria2c -i-
+        run: curl -s "https://yande.re/post.json?limit=${{ github.event.inputs.LIMIT }}&tags=${{ github.event.inputs.TAG }}" | jq -r '.[].jpeg_url' | aria2c -i-
 
       - name: Push Booru Files to Repo
         run: |
