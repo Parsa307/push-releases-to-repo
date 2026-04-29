@@ -1,0 +1,34 @@
+name: Download File
+
+on:
+  workflow_dispatch:
+    inputs:
+      FILE_URL:
+        description: 'FILE_URL'
+        required: true
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+          ref: releases
+
+      - name: Configure Git
+        run: |
+          git config --global user.email "parsastdev@duck.com"
+          git config --global user.name "Parsast"
+
+      - name: Download File
+        run: aria2c "${{ github.event.inputs.FILE_URL }}"
+
+      - name: Push Downloaded File to Repo
+        run: |
+          git add -A
+          git commit -m "push downloaded file to repo"
+          git push -u origin releases
